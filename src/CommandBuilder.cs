@@ -4,14 +4,14 @@ namespace RussellEast.DataAccessBuilder
 {
     internal class CommandBuilder : ICommandBuilder
     {
-        private readonly Context context;
-        private ICommandOptions commandOptions;
+        private readonly Context _context;
+        private readonly ICommandOptions _commandOptions;
 
         public CommandBuilder(Context context)
         {
-            this.context = context;
+            _context = context;
 
-            commandOptions = new CommandOptions(context, this);
+            _commandOptions = new CommandOptions(context, this);
         }
 
         public ICommandOptions WithParameter(string name, object value)
@@ -21,23 +21,23 @@ namespace RussellEast.DataAccessBuilder
                 value = DBNull.Value;
             }
 
-            context.AddParameter(name, value);
+            _context.AddParameter(name, value);
 
-            return commandOptions;
+            return _commandOptions;
         }
 
         public ICommandOptions AddReturnValue()
         {
-            context.AddReturnValue = true;
+            _context.AddReturnValue = true;
 
-            return commandOptions;
+            return _commandOptions;
         }
 
         public ICommandExecutor WithNoParameters()
         {
-            context.HasParameters = false;
+            _context.HasParameters = false;
 
-            return commandOptions;
+            return _commandOptions;
         }
     }
 }

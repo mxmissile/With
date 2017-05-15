@@ -9,15 +9,8 @@ namespace RussellEast.DataAccessBuilder
             Name = name;
         }
 
-        public override string Message
-        {
-            get
-            {
-                return string.Format("Column '{0}' was not found", Name);
-            }
-        }
+        public override string Message => $"Column '{Name}' was not found";
 
-        public string Name { get; private set; }
-
+        public string Name { get; }
     }
 }

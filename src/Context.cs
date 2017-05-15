@@ -5,8 +5,6 @@ namespace RussellEast.DataAccessBuilder
 {
     internal class Context
     {
-        private Dictionary<string, object> parameters;
-
         public CommandType CommandType { get; set; }
         public string CommandText { get; set; }
         public IDbConnection Connection { get; set; }
@@ -14,26 +12,23 @@ namespace RussellEast.DataAccessBuilder
         public bool HasParameters { get; set; }
         public bool AddReturnValue { get; set; }
 
-        public Dictionary<string, object> Parameters
-        {
-            get { return parameters; }
-        }
+        public Dictionary<string, object> Parameters { get; private set; }
 
         public void AddParameter(string name, object value)
         {
-            if (parameters == null)
+            if (Parameters == null)
             {
-                parameters = new Dictionary<string, object>();
+                Parameters = new Dictionary<string, object>();
             }
             else
             {
-                if (parameters.ContainsKey(name))
+                if (Parameters.ContainsKey(name))
                 {
                     return;
                 }
             }
 
-            parameters.Add(name, value);
+            Parameters.Add(name, value);
 
             HasParameters = true;
         }

@@ -6,22 +6,22 @@ namespace RussellEast.DataAccessBuilder
 {
     internal class ConnectionOptions : IConnectionOptions
     {
-        private readonly Context context;
+        private readonly Context _context;
 
-        private ICommandBuilder commandBuilder;
+        private readonly ICommandBuilder _commandBuilder;
 
         public ConnectionOptions(Context context)
         {
-            this.context = context;
+            _context = context;
 
-            commandBuilder = new CommandBuilder(context);
+            _commandBuilder = new CommandBuilder(context);
         }
         
         public ICommandBuilder UsingConnectionString(string connectionString)
         {
-            context.Connection = new SqlConnection(connectionString);
+            _context.Connection = new SqlConnection(connectionString);
 
-            return commandBuilder;
+            return _commandBuilder;
         }
 
         public ICommandBuilder UsingConfiguredConnection(string configKey)
@@ -33,10 +33,10 @@ namespace RussellEast.DataAccessBuilder
 
         public ICommandBuilder UsingConnection(IDbConnection connection)
         {
-            context.IsSuppliedConnection = true;
-            context.Connection = connection;
+            _context.IsSuppliedConnection = true;
+            _context.Connection = connection;
 
-            return commandBuilder;
+            return _commandBuilder;
         }
     }
 }

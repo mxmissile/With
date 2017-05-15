@@ -1,5 +1,4 @@
-﻿
-namespace RussellEast.DataAccessBuilder
+﻿namespace RussellEast.DataAccessBuilder
 {
     public class With
     {
